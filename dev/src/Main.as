@@ -215,20 +215,7 @@ package
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, destacaLamina);
 			etiquetaDragging.stopDrag();
 			
-			if (laminaDestaque != null) {
-				laminaDestaque.filters = [];
-				laminaDestaque = null;
-			}
-			
-			var bacteriaDrop:LaminaBacterias;
-			
-			if (bacteriasTopo.hitTestObject(etiquetaDragging)) {
-				bacteriaDrop = bacteriasTopo;
-			}else if (bacteriasMeio.hitTestObject(etiquetaDragging)) {
-				bacteriaDrop = bacteriasMeio;
-			}else if (bacteriasFundo.hitTestObject(etiquetaDragging)) {
-				bacteriaDrop = bacteriasFundo;
-			}
+			var bacteriaDrop:LaminaBacterias = laminaDestaque;
 			
 			if(bacteriaDrop != null){
 				if (bacteriaDrop.etiqueta == null) { //Drop target sem etiqueta
@@ -275,6 +262,12 @@ package
 				tweenX = new Tween(etiquetaDragging, "x", None.easeNone, etiquetaDragging.x, etiquetaDragging.inicialPos.x, 0.3, true);
 				tweenY = new Tween(etiquetaDragging, "y", None.easeNone, etiquetaDragging.y, etiquetaDragging.inicialPos.y, 0.3, true);
 			}
+			
+			if (laminaDestaque != null) {
+				laminaDestaque.filters = [];
+				laminaDestaque = null;
+			}
+			
 			verificaFinaliza();
 		}
 		
