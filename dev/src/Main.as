@@ -158,11 +158,13 @@ package
 		private function openOrientacoes(e:MouseEvent):void 
 		{
 			orientacoesScreen.openScreen();
+			setChildIndex(orientacoesScreen, numChildren - 1);
 		}
 		
 		private function openCreditos(e:MouseEvent):void 
 		{
 			creditosScreen.openScreen();
+			setChildIndex(creditosScreen, numChildren - 1);
 		}
 		
 		private function limpaTuboEnsaio(e:MouseEvent):void 
