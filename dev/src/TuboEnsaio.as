@@ -68,7 +68,10 @@ package
 			var bacteria:Bacterias = new Bacterias(Bacterias.BACTERIA_TOPO);
 			bacterias_topo.push(bacteria);
 			
-			var pos:Point = getPosition();
+			var pos:Point = new Point(Math.random() * larguraTubo, calculatePos(Math.random(), 0, 10));
+			if (pos.y < 0) {
+				pos.y = Math.abs(pos.y);
+			}
 			
 			this.tubo.addChild(bacteria);
 			bacteria.x = pos.x - larguraTubo / 2;
@@ -86,7 +89,7 @@ package
 			var bacteria:Bacterias = new Bacterias(Bacterias.BACTERIA_MEIO);
 			bacterias_meio.push(bacteria);
 			
-			var pos:Point = new Point(Math.random() * larguraTubo, Math.random() * alturaTubo);
+			var pos:Point = new Point(Math.random() * larguraTubo , calculatePos(Math.random(), alturaTubo/2, 70));
 			
 			this.tubo.addChild(bacteria);
 			bacteria.x = pos.x - larguraTubo / 2;
@@ -104,15 +107,29 @@ package
 			var bacteria:Bacterias = new Bacterias(Bacterias.BACTERIA_FUNDO);
 			bacterias_fundo.push(bacteria);
 			
-			var pos:Point = getPosition();
+			var pos:Point = new Point(calculatePos(Math.random(), 0, 50), calculatePos(Math.random(), alturaTubo - 10, 10));
+			if (pos.y > alturaTubo) {
+				pos.y = alturaTubo - (pos.y - alturaTubo);
+			}
 			
 			this.tubo.addChild(bacteria);
-			bacteria.x = pos.x - larguraTubo / 2;
-			bacteria.y = pos.y + (3 * alturaTubo / 4);
+			bacteria.x = pos.x;
+			bacteria.y = pos.y;
 			
-			timer_fundo = new Timer(Math.random() * 1000 + minTime, 1);
+			timer_fundo = new Timer(Math.random() * 700 + minTime, 1);
 			timer_fundo.addEventListener(TimerEvent.TIMER_COMPLETE, createBacteriaFundo);
 			timer_fundo.start();
+		}
+		
+		private function calculatePos (rnd:Number, media:Number, dispersao:Number) : Number {
+			var ans:Number = 0;
+			
+			if (rnd <= 1/2) ans = media + Math.log(2*rnd) * dispersao;
+			else ans = media - Math.log(2*(1 - rnd)) * dispersao;
+			
+			if (isNaN(ans)) ans = media;
+			
+			return ans;
 		}
 		
 		public function reset():void

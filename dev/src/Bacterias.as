@@ -25,7 +25,8 @@ package
 		private function drawBacteria():void 
 		{
 			graphics.beginFill(color);
-			graphics.drawCircle(0, 0, 2);
+			//graphics.drawCircle(0, 0, 2);
+			graphics.drawRect(-1, -1, 2, 2);
 		}
 		
 	}
