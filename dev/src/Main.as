@@ -11,6 +11,7 @@ package
 	import flash.external.ExternalInterface;
 	import flash.filters.GlowFilter;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.utils.Timer;
 	import pipwerks.SCORM;
 	/**
@@ -48,6 +49,8 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			this.scrollRect = new Rectangle(0, 0, 700, 500);
 			
 			makeLinks();
 			addListeners();
