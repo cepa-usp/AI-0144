@@ -76,6 +76,10 @@ package
 			etiquetaMeio.laminaCerta = bacteriasMeio;
 			etiquetaFundo.laminaCerta = bacteriasFundo;
 			
+			etiquetaTopo.buttonMode = true;
+			etiquetaMeio.buttonMode = true;
+			etiquetaFundo.buttonMode = true;
+			
 			finaliza.buttonMode = true;
 		}
 		
@@ -84,6 +88,10 @@ package
 			bacteriasTopo.addEventListener(MouseEvent.MOUSE_DOWN, getTopoBacteria);
 			bacteriasMeio.addEventListener(MouseEvent.MOUSE_DOWN, getMeioBacteria);
 			bacteriasFundo.addEventListener(MouseEvent.MOUSE_DOWN, getFundoBacteria);
+			
+			bacteriasTopo.buttonMode = true;
+			bacteriasMeio.buttonMode = true;
+			bacteriasFundo.buttonMode = true;
 			
 			etiquetaTopo.addEventListener(MouseEvent.MOUSE_DOWN, getEtiqueta);
 			etiquetaMeio.addEventListener(MouseEvent.MOUSE_DOWN, getEtiqueta);
