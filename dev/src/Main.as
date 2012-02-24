@@ -26,6 +26,9 @@ package
 		private var laminaDestaque:LaminaBacterias;
 		private var glowFilter:GlowFilter = new GlowFilter(0x800000);
 		
+		private var orientacoesScreen:InstScreen;
+		private var creditosScreen:AboutScreen;
+		
 		private var tweenX:Tween;
 		private var tweenY:Tween;
 		
@@ -51,6 +54,11 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
 			this.scrollRect = new Rectangle(0, 0, 700, 500);
+			
+			creditosScreen = new AboutScreen();
+			addChild(creditosScreen);
+			orientacoesScreen = new InstScreen();
+			addChild(orientacoesScreen);
 			
 			makeLinks();
 			addListeners();
@@ -170,12 +178,14 @@ package
 		{
 			orientacoesScreen.openScreen();
 			setChildIndex(orientacoesScreen, numChildren - 1);
+			setChildIndex(bordaAtividade, numChildren - 1);
 		}
 		
 		private function openCreditos(e:MouseEvent):void 
 		{
 			creditosScreen.openScreen();
 			setChildIndex(creditosScreen, numChildren - 1);
+			setChildIndex(bordaAtividade, numChildren - 1);
 		}
 		
 		private function limpaTuboEnsaio(e:MouseEvent):void 
