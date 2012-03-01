@@ -10,12 +10,8 @@ package
 	 */
 	public class TuboEnsaio extends Sprite
 	{
-		private var alturaTubo:Number;// = 225;
-		private var larguraTubo:Number;// = 78;
-		
-		private var range_topo:Point = new Point(0, alturaTubo / 3);
-		private var range_meio:Point = new Point(alturaTubo/3, 2 * (alturaTubo / 3));
-		private var range_fundo:Point = new Point(2 * (alturaTubo / 3), alturaTubo);
+		private var alturaTubo:Number = 174;
+		private var larguraTubo:Number = 40;
 		
 		private var timer_topo:Timer;
 		private var timer_meio:Timer;
@@ -29,8 +25,8 @@ package
 		
 		public function TuboEnsaio() 
 		{
-			alturaTubo = this.height;
-			larguraTubo = this.width;
+			//alturaTubo = this.height;
+			//larguraTubo = this.width;
 		}
 		
 		public function colocaBacteria(type:String):void 
@@ -53,12 +49,6 @@ package
 					break;
 				
 			}
-		}
-		
-		private function getPosition():Point
-		{
-			var pos:Point = new Point(Math.random() * larguraTubo, Math.random() * (alturaTubo / 4));
-			return pos;
 		}
 		
 		private function createBacteriaTopo(e:TimerEvent = null):void
@@ -89,7 +79,7 @@ package
 			var bacteria:Bacterias = new Bacterias(Bacterias.BACTERIA_MEIO);
 			bacterias_meio.push(bacteria);
 			
-			var pos:Point = new Point(Math.random() * larguraTubo , calculatePos(Math.random(), alturaTubo/2, 70));
+			var pos:Point = new Point(Math.random() * larguraTubo , calculatePos(Math.random(), alturaTubo / 2, 70));
 			
 			this.tubo.addChild(bacteria);
 			bacteria.x = pos.x - larguraTubo / 2;
@@ -107,13 +97,14 @@ package
 			var bacteria:Bacterias = new Bacterias(Bacterias.BACTERIA_FUNDO);
 			bacterias_fundo.push(bacteria);
 			
-			var pos:Point = new Point(calculatePos(Math.random(), 0, 50), calculatePos(Math.random(), alturaTubo - 10, 10));
+			//var pos:Point = new Point(calculatePos(Math.random(), 0, 20), calculatePos(Math.random(), alturaTubo, 10));
+			var pos:Point = new Point(Math.random() * larguraTubo, calculatePos(Math.random(), alturaTubo, 10));
 			if (pos.y > alturaTubo) {
 				pos.y = alturaTubo - (pos.y - alturaTubo);
 			}
 			
 			this.tubo.addChild(bacteria);
-			bacteria.x = pos.x;
+			bacteria.x = pos.x - larguraTubo / 2;
 			bacteria.y = pos.y;
 			
 			timer_fundo = new Timer(Math.random() * 700 + minTime, 1);

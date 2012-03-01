@@ -28,6 +28,7 @@ package
 		
 		private var orientacoesScreen:InstScreen;
 		private var creditosScreen:AboutScreen;
+		private var feedbackScreen:FeedBackScreen;
 		
 		private var tweenX:Tween;
 		private var tweenY:Tween;
@@ -59,6 +60,8 @@ package
 			addChild(creditosScreen);
 			orientacoesScreen = new InstScreen();
 			addChild(orientacoesScreen);
+			feedbackScreen = new FeedBackScreen();
+			addChild(feedbackScreen);
 			
 			makeLinks();
 			addListeners();
@@ -70,6 +73,8 @@ package
 			
 			verificaFinaliza();
 			iniciaTutorial();
+			
+			animacaoTrocaTubo.gotoAndStop("FIM");
 		}
 		
 		private function makeLinks():void 
@@ -112,6 +117,8 @@ package
 			botoes.orientacoesBtn.addEventListener(MouseEvent.CLICK, openOrientacoes);
 			botoes.resetButton.addEventListener(MouseEvent.CLICK, reset);
 			botoes.creditos.addEventListener(MouseEvent.CLICK, openCreditos);
+			
+			animacaoTrocaTubo.addEventListener(Event.COMPLETE, voltaTubo);
 		}
 		
 		private function createToolTips():void 
@@ -139,19 +146,19 @@ package
 				addChild(balao);
 				balao.visible = false;
 				
-				pointsTuto = 	[new Point(bacteriasMeio.x, bacteriasMeio.y - 50),
-								new Point(etiquetaMeio.x, etiquetaMeio.y + etiquetaMeio.height + 50),
-								new Point(tuboEnsaio.x - (tuboEnsaio.width / 2), tuboEnsaio.y + 30),
-								new Point(escalaOxigenio.x, escalaOxigenio.y + (escalaOxigenio.height / 2)),
-								new Point(bacteriasMeio.x, bacteriasMeio.y - 50),
-								new Point(trocaTubo.x - (trocaTubo.width / 2), trocaTubo.y)];
+				pointsTuto = 	[new Point(bacteriasMeio.x, bacteriasMeio.y - 30),
+								new Point(etiquetaFundo.x, etiquetaFundo.y + etiquetaFundo.height / 2),
+								new Point(tuboEnsaio.x + (tuboEnsaio.width / 2), tuboEnsaio.y + 30),
+								new Point(escalaOxigenio.x + 10, escalaOxigenio.y + (escalaOxigenio.height / 2)),
+								new Point(bacteriasMeio.x, bacteriasMeio.y - 20),
+								new Point(trocaTubo.x + (trocaTubo.width / 2), trocaTubo.y)];
 								
 				tutoBaloonPos = [[CaixaTexto.BOTTON, CaixaTexto.CENTER],
 								[CaixaTexto.TOP, CaixaTexto.CENTER],
-								[CaixaTexto.RIGHT, CaixaTexto.FIRST],
-								[CaixaTexto.RIGHT, CaixaTexto.CENTER],
+								[CaixaTexto.LEFT, CaixaTexto.FIRST],
+								[CaixaTexto.LEFT, CaixaTexto.CENTER],
 								[CaixaTexto.BOTTON, CaixaTexto.CENTER],
-								[CaixaTexto.RIGHT, CaixaTexto.LAST]];
+								[CaixaTexto.LEFT, CaixaTexto.LAST]];
 			}
 			balao.removeEventListener(Event.CLOSE, closeBalao);
 			
@@ -190,8 +197,16 @@ package
 		
 		private function limpaTuboEnsaio(e:MouseEvent):void 
 		{
+			animacaoTrocaTubo.gotoAndPlay("INICIO");
+			tuboEnsaio.visible = false;
 			tuboEnsaio.reset();
 		}
+		
+		private function voltaTubo(e:Event):void
+		{
+			tuboEnsaio.visible = true;
+		}
+		
 		
 		private function getEtiqueta(e:MouseEvent):void 
 		{
@@ -246,6 +261,7 @@ package
 					etiquetaDragging.laminaAtual = bacteriaDrop;
 					etiquetaDragging.x = bacteriaDrop.x;
 					etiquetaDragging.y = bacteriaDrop.y;
+					etiquetaDragging.gotoAndStop(2);
 					bacteriaDrop.etiqueta = etiquetaDragging;
 				}else {//Drop targte com etiqueta
 					if (etiquetaDragging.laminaAtual != null) {//Vindo de uma lamina para uma lamina com etiqueta
@@ -265,12 +281,14 @@ package
 						laminaDrag.etiqueta = etiquetaDrop;
 					}else {//Vindo "do nada" para uma lamina com etiqueta
 						etiquetaDrop = bacteriaDrop.etiqueta;
+						etiquetaDrop.gotoAndStop(1);
 						
 						tweenX = new Tween(etiquetaDrop, "x", None.easeNone, etiquetaDrop.x, etiquetaDrop.inicialPos.x, 0.3, true);
 						tweenY = new Tween(etiquetaDrop, "y", None.easeNone, etiquetaDrop.y, etiquetaDrop.inicialPos.y, 0.3, true);
 						
 						etiquetaDragging.x = bacteriaDrop.x;
 						etiquetaDragging.y = bacteriaDrop.y;
+						etiquetaDragging.gotoAndStop(2);
 						
 						etiquetaDragging.laminaAtual = bacteriaDrop;
 						bacteriaDrop.etiqueta = etiquetaDragging;
@@ -284,6 +302,7 @@ package
 				
 				tweenX = new Tween(etiquetaDragging, "x", None.easeNone, etiquetaDragging.x, etiquetaDragging.inicialPos.x, 0.3, true);
 				tweenY = new Tween(etiquetaDragging, "y", None.easeNone, etiquetaDragging.y, etiquetaDragging.inicialPos.y, 0.3, true);
+				etiquetaDragging.gotoAndStop(1);
 			}
 			
 			if (laminaDestaque != null) {
@@ -385,14 +404,14 @@ package
 						completed = true;
 						commit();
 					}
-					trace("correto");
+					feedbackScreen.setText("Parabéns!\nA sequência está correta.");
 				}else {
 					if(connected && !completed){
 						score = 0;
 						completed = true;
 						commit();
 					}
-					trace("errado");
+					feedbackScreen.setText("Releia a questão e avalie a sequência escolhida.");
 				}
 		}
 		
