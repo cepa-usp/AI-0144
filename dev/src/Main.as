@@ -372,6 +372,10 @@ package
 			etiquetaMeio.laminaAtual = null;
 			etiquetaFundo.laminaAtual = null;
 			
+			etiquetaTopo.gotoAndStop(1);
+			etiquetaMeio.gotoAndStop(1);
+			etiquetaFundo.gotoAndStop(1);
+			
 			bacteriasTopo.etiqueta = null;
 			bacteriasMeio.etiqueta = null;
 			bacteriasFundo.etiqueta = null;
