@@ -40,7 +40,7 @@ package
 		private var tutoSequence:Array = ["Estas placas de Petri contém três espécies distintas de bactérias.", 
 										  "Classifique as bactérias arrastando os rótulos para as placas de Petri.",
 										  "O tubo de ensaio contém um líquido propício à proliferação das três bactérias.",
-										  "Esta escala indica a distribuição de oxigênio no tubo de ensaio.",
+										  "Esta escala indica a distribuição de oxigênio no tubo de ensaio: quanto mais verde, mais oxigênio há naquela altura do tubo.",
 										  "Você pode arrastar uma ou mais bactérias para dentro do tubo de ensaio.",
 										  "Pressione este botão para trocar o tubo de ensaio e começar uma nova experiência."];
 		
