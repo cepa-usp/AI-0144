@@ -56,6 +56,8 @@ package
 			
 			this.scrollRect = new Rectangle(0, 0, 700, 500);
 			
+			animacaoTrocaTubo.gotoAndStop("FIM");
+			
 			creditosScreen = new AboutScreen();
 			addChild(creditosScreen);
 			orientacoesScreen = new InstScreen();
@@ -67,14 +69,12 @@ package
 			addListeners();
 			createToolTips();
 			
-			if (ExternalInterface.available) {
-				initLMSConnection();
-			}
-			
 			verificaFinaliza();
 			iniciaTutorial();
 			
-			animacaoTrocaTubo.gotoAndStop("FIM");
+			if (ExternalInterface.available) {
+				initLMSConnection();
+			}
 		}
 		
 		private function makeLinks():void 
